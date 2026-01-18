@@ -14,10 +14,17 @@ public class Main {
                         2 - Оплата наличными;
                         3 - Оплата криптовалютой.
                         0 - выход""");
+
             choice = scanner.nextInt();
-            if (choice ==  0) System.exit(0);
-            System.out.println("Хотите изменить способ оплаты? (Y/N)");
+
+            if (choice ==  0) {
+                scanner.close();
+                System.exit(0);
+            }
+
+            System.out.print("Хотите изменить способ оплаты? (Y/N) : ");
             scanner.nextLine();
+
             if (scanner.nextLine().equalsIgnoreCase("y")) choice = 0;
 
             if (choice > 0 && choice < 4) {

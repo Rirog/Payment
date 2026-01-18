@@ -10,21 +10,13 @@ public class Payment {
     }
 
     public void paymentProcessing() {
-        PaymentMethod paymentMethod;
-        switch (choice) {
-            case 1:
-                paymentMethod = new PaymentCard();
-                paymentMethod.payment(sum);
-                break;
-            case 2:
-                paymentMethod = new PaymentCash();
-                paymentMethod.payment(sum);
-                break;
-            case 3:
-                paymentMethod = new PaymentCrypt();
-                paymentMethod.payment(sum);
-                break;
-        }
+        PaymentMethod paymentMethod = switch (choice) {
+            case 1 -> new PaymentCard();
+            case 2 -> new PaymentCash();
+            case 3 -> new PaymentCrypt();
+            default -> null;
+        };
+        paymentMethod.payment(sum);
     }
 
 }
