@@ -4,9 +4,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int choice;
+        int choice = 0;
         float sum = 0;
-
         do {
             System.out.println("""
                         Payment
@@ -14,7 +13,11 @@ public class Main {
                         2 - Оплата наличными;
                         3 - Оплата криптовалютой.
                         0 - Выход""");
-
+            if (!scanner.hasNextInt()) {
+                System.out.println("Некорректная команда");
+                scanner.nextLine();
+                continue;
+            }
             choice = scanner.nextInt();
 
             if (choice ==  0) {
@@ -22,7 +25,7 @@ public class Main {
                 System.exit(0);
             }
 
-            System.out.print("Хотите изменить способ оплаты? (Y/N) : ");
+            System.out.print("Хотите изменить способ оплаты? (Y) : "); //Неважно, что можно любой символ ввести и он пройдет
             scanner.nextLine();
 
             if (scanner.nextLine().equalsIgnoreCase("y")) choice = 0;
