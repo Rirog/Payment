@@ -1,54 +1,52 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int choice = 0;
+        int choice;
         float sum = 0;
-        do {
-            System.out.println("""
+
+            do {
+                try {
+                System.out.println("""
                         Payment
                         1 - Оплата картой;
                         2 - Оплата наличными;
                         3 - Оплата криптовалютой.
                         0 - Выход""");
 
-            if (!scanner.hasNextInt()) {
-                System.out.println("Некорректная команда");
-                scanner.nextLine();
-                continue;
-            }
-            choice = scanner.nextInt();
+                choice = scanner.nextInt();
 
-            if (choice ==  0) {
-                scanner.close();
-                System.exit(0);
-            }
+                if (choice == 0) {
+                    scanner.close();
+                    System.exit(0);
+                }
 
-            if (choice > 0 && choice < 4) {
+                if (choice > 0 && choice < 4) {
 
-                System.out.print("Хотите изменить способ оплаты? (Y) : "); //Неважно, что можно любой символ ввести и он пройдет
-                scanner.nextLine();
+                    System.out.print("Хотите изменить способ оплаты? (Y) : "); //Неважно, что можно любой символ ввести и он пройдет
+                    scanner.nextLine();
 
-                if (scanner.nextLine().equalsIgnoreCase("y")) choice = 0;
+                    if (scanner.nextLine().equalsIgnoreCase("y")) choice = 0;
 
-                System.out.println("Введите сумму платежа");
-                if (!scanner.hasNextFloat()){
-                    System.out.println("Введенна некорректная сумма");
+                    System.out.println("Введите сумму платежа");
+
+                    sum = scanner.nextFloat();
+                    if (sum <= 0) {
+                        System.out.println("Введенна некорректная сумма");
+                        choice = 0;
+                    }
+                }
+                } catch (InputMismatchException e) {
+                    System.err.println("Некорректный ввод");
                     scanner.nextLine();
                     choice = 0;
-                    continue;
+                    sum = 0;
                 }
-                sum = scanner.nextFloat();
-                if (sum <= 0){
-                    System.out.println("Введенна некорректная сумма");
-                    choice = 0;
-                }
-            }
-        } while (choice > 3 || choice < 1);
+            } while (choice > 3 || choice < 1);
 
-        scanner.close();
         Payment payment = new Payment(choice, sum);
         payment.paymentProcessing();
 
