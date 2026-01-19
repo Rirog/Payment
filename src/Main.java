@@ -26,7 +26,7 @@ public class Main {
 
                 if (choice > 0 && choice < 4) {
 
-                    System.out.print("Хотите изменить способ оплаты? (Y) : "); //Неважно, что можно любой символ ввести и он пройдет
+                    System.out.print("Хотите изменить способ оплаты? (Y) : "); //Неважно, что можно любой символ ввести и он пройдет?
                     scanner.nextLine();
 
                     if (scanner.nextLine().equalsIgnoreCase("y")) choice = 0;
